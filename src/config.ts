@@ -430,7 +430,7 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 export const commentConfig: CommentConfig = {
 	enable: true, // 启用评论功能。当设置为 false 时，评论组件将不会显示在文章区域。
 	twikoo: {
-		envId: "http://43.153.183.194:8080/",
+		envId: "https://twikoo.syndred.top/",
 		lang: SITE_LANG,
 	},
 };
