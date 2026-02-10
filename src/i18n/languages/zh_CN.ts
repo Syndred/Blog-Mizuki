@@ -125,7 +125,7 @@ export const zh_CN: Translation = {
 
 	// 设备页面
 	[Key.devices]: "常用软件",
-	[Key.devicesSubtitle]: "这里展示了我日常高频使用的软件与工具",
+	[Key.devicesSubtitle]: "常用软件与工具",
 	[Key.devicesViewDetails]: "访问官网",
 
 	// 项目展示页面
