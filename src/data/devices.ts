@@ -2,7 +2,7 @@
 
 export interface Software {
 	name: string;
-	image: string;
+	image?: string;
 	specs: string;
 	description: string;
 	link: string;

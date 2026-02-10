@@ -69,12 +69,21 @@ const categories = Object.keys(softwareByCategory);
 								<div class="p-4">
 									<div class="flex items-start gap-3">
 										<div class="software-avatar w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[var(--btn-regular-bg)] border border-[var(--line-divider)] overflow-hidden flex items-center justify-center shrink-0">
-											<img
-												src={software.image}
-												alt={software.name}
-												loading="lazy"
-												class="w-3/4 h-3/4 object-contain"
-											/>
+											{software.image && software.image.trim() && (
+												<img
+													src={software.image}
+													alt={software.name}
+													loading="lazy"
+													class="w-3/4 h-3/4 object-contain"
+													onerror="this.style.display='none'; const span=this.nextElementSibling; if(span){ span.style.display='inline-flex'; }"
+												/>
+											)}
+											<span
+												class="text-lg font-semibold text-black/80 dark:text-white/80"
+												style={software.image && software.image.trim() ? "display: none;" : ""}
+											>
+												{software.name.charAt(0).toUpperCase()}
+											</span>
 										</div>
 										<div class="min-w-0 flex flex-col">
 											<h3 class="text-base font-bold text-black/90 dark:text-white/90 group-hover:text-[var(--primary)] transition-colors duration-300 leading-snug truncate">
@@ -149,12 +158,25 @@ const categories = Object.keys(softwareByCategory);
 								<div class="p-4">
 									<div class="flex items-start gap-3">
 										<div class="software-avatar w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[var(--btn-regular-bg)] border border-[var(--line-divider)] overflow-hidden flex items-center justify-center shrink-0">
-											<img
-												src="${software.image}"
-												alt="${software.name}"
-												loading="lazy"
-												class="w-3/4 h-3/4 object-contain"
-											/>
+											${
+												software.image && software.image.trim()
+													? `<img
+															src="${software.image}"
+															alt="${software.name}"
+															loading="lazy"
+															class="w-3/4 h-3/4 object-contain"
+															onerror="this.style.display='none'; const span=this.nextElementSibling; if(span){ span.style.display='inline-flex'; }"
+														/>
+														<span
+															class="text-lg font-semibold text-black/80 dark:text-white/80"
+															style="display: none;"
+														>
+															${software.name.charAt(0).toUpperCase()}
+														</span>`
+													: `<span class="text-lg font-semibold text-black/80 dark:text-white/80">
+															${software.name.charAt(0).toUpperCase()}
+														</span>`
+											}
 										</div>
 										<div class="min-w-0 flex flex-col">
 											<h3 class="text-base font-bold text-black/90 dark:text-white/90 group-hover:text-[var(--primary)] transition-colors duration-300 leading-snug truncate">
