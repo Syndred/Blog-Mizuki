@@ -425,42 +425,58 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
   }
   
   // 页面加载完成后初始化
-  document.addEventListener('DOMContentLoaded', function() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initTimelinePage();
+      initTimelineToggleButtons();
+    });
+  } else {
+    // DOM已加载完成，直接初始化
     initTimelinePage();
     initTimelineToggleButtons();
-  });
+  }
   
-  // 初始化展开/收起按钮
+  // 初始化展开/收起按钮 - 使用事件委托避免重复绑定问题
   function initTimelineToggleButtons() {
-    const toggleBtns = document.querySelectorAll('.timeline-toggle-btn');
+    // 先移除已存在的事件监听器，避免重复绑定
+    document.removeEventListener('click', handleTimelineToggle);
+    // 使用事件委托，监听整个文档的点击事件
+    document.addEventListener('click', handleTimelineToggle);
+  }
+  
+  // 处理展开/收起点击事件
+  function handleTimelineToggle(e) {
+    const btn = e.target.closest('.timeline-toggle-btn');
+    if (!btn) return;
     
-    toggleBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        const wrapper = btn.closest('.timeline-description-wrapper');
-        const description = wrapper?.querySelector('.timeline-description');
-        const achievements = wrapper?.querySelector('.timeline-achievements');
-        const textSpan = btn.querySelector('.toggle-text');
-        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-        
-        if (isExpanded) {
-          // 收起
-          description?.classList.add('line-clamp-3');
-          description?.classList.remove('expanded');
-          achievements?.classList.remove('visible');
-          btn.classList.remove('expanded');
-          btn.setAttribute('aria-expanded', 'false');
-          if (textSpan) textSpan.textContent = '展开';
-        } else {
-          // 展开
-          description?.classList.remove('line-clamp-3');
-          description?.classList.add('expanded');
-          achievements?.classList.add('visible');
-          btn.classList.add('expanded');
-          btn.setAttribute('aria-expanded', 'true');
-          if (textSpan) textSpan.textContent = '收起';
-        }
-      });
-    });
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const wrapper = btn.closest('.timeline-description-wrapper');
+    if (!wrapper) return;
+    
+    const description = wrapper.querySelector('.timeline-description');
+    const achievements = wrapper.querySelector('.timeline-achievements');
+    const textSpan = btn.querySelector('.toggle-text');
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    
+    if (isExpanded) {
+      // 收起
+      description?.classList.add('line-clamp-3');
+      description?.classList.remove('expanded');
+      achievements?.classList.remove('visible');
+      btn.classList.remove('expanded');
+      btn.setAttribute('aria-expanded', 'false');
+      if (textSpan) textSpan.textContent = '展开';
+    } else {
+      // 展开
+      description?.classList.remove('line-clamp-3');
+      description?.classList.add('expanded');
+      achievements?.classList.add('visible');
+      btn.classList.add('expanded');
+      btn.setAttribute('aria-expanded', 'true');
+      if (textSpan) textSpan.textContent = '收起';
+    }
   }
   
   // 处理页面导航时的图标重新加载
@@ -477,32 +493,26 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
     
     // 增强对 Astro 导航的支持
     document.addEventListener('astro:page-load', function() {
-      setTimeout(function() {
-        initTimelinePage();
-        initTimelineToggleButtons();
-      }, 100);
+      // 页面完全加载后初始化
+      initTimelinePage();
+      initTimelineToggleButtons();
     });
     
     document.addEventListener('astro:after-swap', function() {
-      setTimeout(function() {
-        initTimelinePage();
-        initTimelineToggleButtons();
-      }, 100);
+      // DOM交换后立即初始化
+      initTimelinePage();
+      initTimelineToggleButtons();
     });
     
     // 监听 SWUP 事件
     document.addEventListener('swup:contentReplaced', function() {
-      setTimeout(function() {
-        initTimelinePage();
-        initTimelineToggleButtons();
-      }, 100);
+      initTimelinePage();
+      initTimelineToggleButtons();
     });
     
     document.addEventListener('swup:pageView', function() {
-      setTimeout(function() {
-        initTimelinePage();
-        initTimelineToggleButtons();
-      }, 100);
+      initTimelinePage();
+      initTimelineToggleButtons();
     });
   }
 </script>
