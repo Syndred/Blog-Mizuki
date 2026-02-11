@@ -83,6 +83,7 @@ Get started quickly with our comprehensive documentation. Whether you're customi
 - [x] **Friends Page** - Beautiful cards showcasing friend websites
 - [x] **Diary Page** - Share life moments, similar to social media
 - [x] **Archive Page** - Organized timeline view of articles
+- [x] **Timeline Page** - Personal resume and experience timeline with expandable cards
 - [x] **About Page** - Customizable personal introduction
 
 ### 🛠 Technical Features
