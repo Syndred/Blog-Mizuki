@@ -42,7 +42,7 @@ export const timelineData: TimelineItem[] = [
 			"兼职羽毛球教练，发挥体育特长",
 		],
 		icon: "material-symbols:school",
-		color:="#DC2626",
+		color: "#DC2626",
 		featured: true,
 	},
 	{
@@ -64,7 +64,7 @@ export const timelineData: TimelineItem[] = [
 			"交通局12328平台：使用Vue2+Vuetify完成协办工单流程及表单操作",
 		],
 		icon: "material-symbols:work",
-		color:="#DC2626",
+		color: "#DC2626",
 		featured: true,
 	},
 	{
@@ -85,7 +85,7 @@ export const timelineData: TimelineItem[] = [
 			"网页端OS：使用jQuery、Vue、Bootstrap、ElementUI、WebSocket等技术实现网页端操作系统",
 		],
 		icon: "material-symbols:work",
-		color:="#DC2626",
+		color: "#DC2626",
 		featured: true,
 	},
 
@@ -113,7 +113,7 @@ export const timelineData: TimelineItem[] = [
 			"担任抖音探店达人和账号运营",
 		],
 		icon: "material-symbols:school",
-		color:="#059669",
+		color: "#059669",
 		featured: true,
 	},
 
@@ -134,7 +134,7 @@ export const timelineData: TimelineItem[] = [
 			"负责文档撰写和演示准备",
 		],
 		icon: "material-symbols:emoji-events",
-		color:="#7C3AED",
+		color: "#7C3AED",
 		featured: true,
 	},
 	{
@@ -154,7 +154,7 @@ export const timelineData: TimelineItem[] = [
 			"后期负责部分文档编写和演示视频剪辑",
 		],
 		icon: "material-symbols:emoji-events",
-		color:="#7C3AED",
+		color: "#7C3AED",
 		featured: true,
 	},
 
@@ -176,7 +176,7 @@ export const timelineData: TimelineItem[] = [
 			"完成一个完整可用的失物招领平台",
 		],
 		icon: "material-symbols:code",
-		color:="#EA580C",
+		color: "#EA580C",
 		featured: true,
 	},
 
@@ -196,7 +196,7 @@ export const timelineData: TimelineItem[] = [
 			"1+X Web前端开发中级证书",
 		],
 		icon: "material-symbols:verified",
-		color:="#059669",
+		color: "#059669",
 	},
 ];
 
