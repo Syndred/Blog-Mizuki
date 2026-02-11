@@ -290,7 +290,7 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
                               I18nKey.timelineAchievement)}
                       </span>
                       
-                      <div class="timeline-description-wrapper relative">
+                      <div class="timeline-description-wrapper relative" data-has-achievements={item.achievements && item.achievements.length > 0 ? "true" : "false"}>
                         <p class="text-sm text-black/70 dark:text-white/70 line-clamp-3 timeline-description">
                           {item.description}
                         </p>
@@ -302,8 +302,10 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
                           </ul>
                         )}
                         <button 
+                          type="button"
                           class="timeline-toggle-btn mt-2 text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium flex items-center gap-1 transition-colors"
                           aria-expanded="false"
+                          onclick="toggleTimelineCard(this)"
                         >
                           <span class="toggle-text">展开</span>
                           <svg class="toggle-icon w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -436,28 +438,15 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
     initTimelineToggleButtons();
   }
   
-  // 初始化展开/收起按钮 - 使用事件委托避免重复绑定问题
-  function initTimelineToggleButtons() {
-    // 先移除已存在的事件监听器，避免重复绑定
-    document.removeEventListener('click', handleTimelineToggle);
-    // 使用事件委托，监听整个文档的点击事件
-    document.addEventListener('click', handleTimelineToggle);
-  }
-  
-  // 处理展开/收起点击事件
-  function handleTimelineToggle(e) {
-    const btn = e.target.closest('.timeline-toggle-btn');
-    if (!btn) return;
-    
-    e.preventDefault();
-    e.stopPropagation();
-    
+  // 全局展开/收起函数，供内联 onclick 调用
+  window.toggleTimelineCard = function(btn) {
     const wrapper = btn.closest('.timeline-description-wrapper');
     if (!wrapper) return;
     
     const description = wrapper.querySelector('.timeline-description');
     const achievements = wrapper.querySelector('.timeline-achievements');
     const textSpan = btn.querySelector('.toggle-text');
+    const icon = btn.querySelector('.toggle-icon');
     const isExpanded = btn.getAttribute('aria-expanded') === 'true';
     
     if (isExpanded) {
@@ -468,6 +457,7 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
       btn.classList.remove('expanded');
       btn.setAttribute('aria-expanded', 'false');
       if (textSpan) textSpan.textContent = '展开';
+      if (icon) icon.style.transform = 'rotate(0deg)';
     } else {
       // 展开
       description?.classList.remove('line-clamp-3');
@@ -476,7 +466,13 @@ const subtitle = i18n(I18nKey.timelineSubtitle);
       btn.classList.add('expanded');
       btn.setAttribute('aria-expanded', 'true');
       if (textSpan) textSpan.textContent = '收起';
+      if (icon) icon.style.transform = 'rotate(180deg)';
     }
+  };
+  
+  // 初始化展开/收起按钮（不再需要，使用内联 onclick）
+  function initTimelineToggleButtons() {
+    // 按钮已使用内联 onclick，无需额外初始化
   }
   
   // 处理页面导航时的图标重新加载
