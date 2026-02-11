@@ -2,8 +2,9 @@
 title: OpenClaw 完全使用指南：从零搭建你的 AI 会话系统
 published: 2026-02-07
 description: 一篇超详细的 OpenClaw 实战教程，涵盖完整命令参考、配置详解、模型切换策略与排坑指南，基于真实踩坑经验整理，新手友好。
-tags: ["OpenClaw", "AI", "Gateway", "配置教程", "CLI"]
-category: "Technology"
+tags: [OpenClaw, AI]
+category: Technology
+author: "安羽"
 draft: false
 ---
 

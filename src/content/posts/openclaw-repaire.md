@@ -2,8 +2,10 @@
 title: 踩坑实录
 published: 2026-02-04
 description: 记录部署 Meting API 服务器和配置 OpenClaw 系统过程中遇到的问题及解决方案
-tags: ["踩坑", "Meting API", "OpenClaw", "配置", "服务器"]
-category: "技术"
+tags: [OpenClaw, Technology]
+category: Technology
+author: "安羽"
+draft: false
 ---
 # 踩坑实录
 

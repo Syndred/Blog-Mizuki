@@ -103,7 +103,8 @@ const useJapaneseBadge = siteConfig.toc.useJapaneseBadge;
 		bottom: 4.5rem;
 		right: 0;
 		width: 18rem;
-		max-height: 60vh;
+		/* 避免在 1K 等小屏上顶部飞出视口：不超过「视口高度 - 面板底到视口底」 */
+		max-height: min(60vh, calc(100vh - 22rem));
 		background: var(--card-bg);
 		border: 1px solid var(--line-color);
 		border-radius: 1rem;
@@ -125,7 +126,7 @@ const useJapaneseBadge = siteConfig.toc.useJapaneseBadge;
 
 	.floating-toc-panel-content {
 		padding: 0.75rem;
-		max-height: 60vh;
+		max-height: min(60vh, calc(100vh - 22rem));
 		overflow-y: auto;
 		overflow-x: hidden;
 	}
@@ -169,6 +170,11 @@ const useJapaneseBadge = siteConfig.toc.useJapaneseBadge;
 			max-width: 20rem;
 			right: 0;
 			bottom: 4.5rem;
+			max-height: min(60vh, calc(100vh - 12rem));
+		}
+
+		.floating-toc-panel-content {
+			max-height: min(60vh, calc(100vh - 12rem));
 		}
 	}
 

@@ -72,11 +72,11 @@ export const skillsData: Skill[] = [
 		color: "#4FC08D",
 	},
 	{
-		id: "angular",
-		name: "Angular",
+		id: "autojs",
+		name: "Auto.js",
 		description:
 			"An enterprise-level frontend framework developed by Google, a complete single-page application solution.",
-		icon: "logos:angular-icon",
+		icon: "logos",
 		category: "frontend",
 		level: "beginner",
 		experience: { years: 0, months: 9 },

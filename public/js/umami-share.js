@@ -130,4 +130,13 @@
 	global.clearUmamiShareCache = () => {
 		localStorage.removeItem(cacheKey);
 	};
+
+	// 派发事件通知脚本加载完成
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", () => {
+			window.dispatchEvent(new Event("umami-ready"));
+		});
+	} else {
+		window.dispatchEvent(new Event("umami-ready"));
+	}
 })(window);

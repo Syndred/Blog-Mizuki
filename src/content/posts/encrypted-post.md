@@ -6,8 +6,8 @@ encrypted: true
 pinned: true
 password: "123456"
 alias: "encrypted-example"
-tags: ["Test", "Encryption"]
-category: "Technology"
+tags: [Encryption, Example]
+category: "Examples"
 draft: true
 ---
 

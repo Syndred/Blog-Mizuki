@@ -124,9 +124,9 @@ export const zh_CN: Translation = {
 	[Key.albumsPhotosCount]: "张照片",
 
 	// 设备页面
-	[Key.devices]: "我的设备",
-	[Key.devicesSubtitle]: "这里展示了我日常使用的各类设备",
-	[Key.devicesViewDetails]: "查看详情",
+	[Key.devices]: "常用软件",
+	[Key.devicesSubtitle]: "常用软件与工具",
+	[Key.devicesViewDetails]: "访问官网",
 
 	// 项目展示页面
 	[Key.projects]: "项目展示",

@@ -97,24 +97,44 @@ const umamiBaseUrl = umamiConfig.baseUrl || "";
                 const pageViews = stats.pageviews || 0;
                 const visits = stats.visits || 0;
                 
-                const displayElement = document.getElementById('site-stats-display');
-                if (displayElement) {
-                    displayElement.textContent = generateStatsText(pageViews, visits);
+                const displayElements = document.querySelectorAll('#site-stats-display');
+                if (displayElements.length > 0) {
+                    displayElements.forEach(el => {
+                        el.textContent = generateStatsText(pageViews, visits);
+                    });
                 }
             } catch (error) {
                 console.error('Error fetching site stats:', error);
-                const displayElement = document.getElementById('site-stats-display');
-                if (displayElement) {
-                    displayElement.textContent = profileStatsUnavailable;
+                const displayElements = document.querySelectorAll('#site-stats-display');
+                if (displayElements.length > 0) {
+                    displayElements.forEach(el => {
+                        el.textContent = profileStatsUnavailable;
+                    });
                 }
             }
         }
 
-        if (document.readyState === 'loading') {
-            // 页面加载完成后获取统计数据
-            document.addEventListener('DOMContentLoaded', () => fetchSiteStats());
-        } else {
-            fetchSiteStats();
+        // 等待全局函数加载后再执行
+        function initStats() {
+            if (typeof getUmamiWebsiteStats === 'function') {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', fetchSiteStats);
+                } else {
+                    fetchSiteStats();
+                }
+            } else {
+                // 如果函数还未加载，延迟后重试
+                setTimeout(initStats, 100);
+            }
         }
+
+        // 监听 umami-ready 事件
+        window.addEventListener('umami-ready', () => {
+            if (typeof getUmamiWebsiteStats === 'function') {
+                fetchSiteStats();
+            }
+        });
+
+        initStats();
     </script>
 )}

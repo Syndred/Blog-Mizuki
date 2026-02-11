@@ -1,10 +1,10 @@
 ---
-title: Simple Guides for Mizuki
+title: Simple Guides Of Folder
 published: 2024-04-01
 description: "How to use this blog template."
 image: "./cover.webp"
-tags: ["Mizuki", "Blogging", "Customization"]
-category: Guides
+tags: [Example]
+category: Examples
 draft: true
 ---
 

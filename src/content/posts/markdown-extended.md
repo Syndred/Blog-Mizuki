@@ -2,9 +2,9 @@
 title: Markdown Extended Features
 published: 2024-05-01
 updated: 2024-11-29
-description: 'Read more about Markdown features in Mizuki'
+description: 'Read more about Markdown features'
 image: ''
-tags: [Demo, Example, Markdown, mizuki]
+tags: [Markdown, Example]
 category: 'Examples'
 draft: false 
 ---
@@ -91,3 +91,4 @@ The content :spoiler[is hidden **ayyy**]!
 
 ```markdown
 The content :spoiler[is hidden **ayyy**]!
+```

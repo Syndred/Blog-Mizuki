@@ -127,9 +127,9 @@ export const ja: Translation = {
 	[Key.albumsBackToList]: "アルバムに戻る",
 
 	// デバイスページ
-	[Key.devices]: "デバイス",
-	[Key.devicesSubtitle]: "日常的に使用しているデバイスを紹介",
-	[Key.devicesViewDetails]: "詳細を表示",
+	[Key.devices]: "よく使うソフト",
+	[Key.devicesSubtitle]: "日常的によく使っているソフトやツールを紹介",
+	[Key.devicesViewDetails]: "公式サイトへ",
 	[Key.albumsPhotoCount]: "件の写真",
 	[Key.albumsPhotosCount]: "件の写真",
 
