@@ -98,6 +98,7 @@ export const zh_TW: Translation = {
 	[Key.movieTitle]: "我的觀影記錄",
 	[Key.movieSubtitle]: "記錄我的光影之旅",
 	[Key.movieStatusWatched]: "看過",
+	[Key.movieStatusWatching]: "在看",
 	[Key.movieStatusPlanned]: "想看",
 	[Key.movieFilterAll]: "全部",
 	[Key.movieDirector]: "導演",

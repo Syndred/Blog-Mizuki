@@ -96,6 +96,7 @@ export const ja: Translation = {
 	[Key.movieTitle]: "視聴した映画",
 	[Key.movieSubtitle]: "映画の旅の記録です",
 	[Key.movieStatusWatched]: "視聴済み",
+	[Key.movieStatusWatching]: "視聴中",
 	[Key.movieStatusPlanned]: "検討中",
 	[Key.movieFilterAll]: "すべて",
 	[Key.movieDirector]: "監督",
