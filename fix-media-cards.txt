@@ -1,0 +1,66 @@
+书籍卡片新布局（替换 p-3 部分）：
+
+<div class="p-4">
+	<div class="flex items-start justify-between mb-2">
+		<h3 class="text-base font-bold text-black/90 dark:text-white/90 leading-tight line-clamp-1 flex-1 pr-2">
+			{book.title || `豆瓣ID: ${book.doubanId}`}
+		</h3>
+		{book.rating && (
+			<div class="flex items-center gap-1 text-sm text-amber-500 flex-shrink-0">
+				<span>⭐</span>
+				<span class="font-semibold">{book.rating}</span>
+			</div>
+		)}
+	</div>
+	{book.description && (
+		<p class="text-black/60 dark:text-white/60 text-xs leading-relaxed mb-3 line-clamp-2">
+			{book.description}
+		</p>
+	)}
+	{book.genre && book.genre.length > 0 && (
+		<div class="flex flex-wrap gap-1.5">
+			{book.genre.slice(0, 3).map((g) => (
+				<span class="px-2 py-0.5 bg-black/5 dark:bg-white/5 text-black/70 dark:text-white/70 text-xs rounded">
+					{g}
+				</span>
+			))}
+		</div>
+	)}
+</div>
+
+电影卡片新布局（替换 p-3 部分）：
+
+<div class="p-4">
+	<div class="flex items-start justify-between mb-2">
+		<h3 class="text-base font-bold text-black/90 dark:text-white/90 leading-tight line-clamp-1 flex-1 pr-2">
+			{movie.title || `豆瓣ID: ${movie.doubanId}`}
+		</h3>
+		{movie.rating && (
+			<div class="flex items-center gap-1 text-sm text-amber-500 flex-shrink-0">
+				<span>⭐</span>
+				<span class="font-semibold">{movie.rating}</span>
+			</div>
+		)}
+	</div>
+	{movie.director && (
+		<p class="text-black/60 dark:text-white/60 text-xs leading-relaxed mb-3 line-clamp-2">
+			导演: {movie.director}
+		</p>
+	)}
+	<div class="flex items-center justify-between">
+		{movie.genre && movie.genre.length > 0 && (
+			<div class="flex flex-wrap gap-1.5">
+				{movie.genre.slice(0, 2).map((g) => (
+					<span class="px-2 py-0.5 bg-black/5 dark:bg-white/5 text-black/70 dark:text-white/70 text-xs rounded">
+						{g}
+					</span>
+				))}
+			</div>
+		)}
+		{movie.year && (
+			<span class="text-xs text-black/50 dark:text-white/50 flex-shrink-0 ml-2">
+				{movie.year}
+			</span>
+		)}
+	</div>
+</div>

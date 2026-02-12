@@ -21,52 +21,88 @@ export type BookItem = {
 
 const localBookList: BookItem[] = [
 	// 看过的书籍
-	{ doubanId: "26728092", status: "completed" }, // 非暴力沟通
-	{ doubanId: "1051220", status: "completed" }, // 潜规则
-	{ doubanId: "25862578", status: "completed" }, // 重返狼群
-	{ doubanId: "1082154", status: "completed" }, // 活着
-	{ doubanId: "30373904", status: "completed" }, // 低风险创业
-	{ doubanId: "21966353", status: "completed" }, // 贫穷的本质
-	{ doubanId: "1427917", status: "completed" }, // 我与地坛
-	{ doubanId: "1040934", status: "completed" }, // 君主论
-	{ doubanId: "26363229", status: "completed" }, // 爱的博弈
-	{ doubanId: "20427187", status: "completed" }, // 天才在左疯子在右
-	{ doubanId: "26916012", status: "completed" }, // 启示路
-	{ doubanId: "34466972", status: "completed" }, // 纳瓦尔宝典
-	{ doubanId: "1033778", status: "completed" }, // 穷爸爸富爸爸
+	{
+		doubanId: "26728092",
+		status: "completed",
+		title: "非暴力沟通",
+		author: "马歇尔·卢森堡",
+		cover: "/assets/books/chongfan.jpg",
+		rating: 8.6,
+		description: "一本关于沟通技巧的经典著作，教你如何用爱的语言化解冲突。",
+		genre: ["心理学", "沟通"],
+	},
+	{
+		doubanId: "1051220",
+		status: "completed",
+		title: "潜规则",
+		author: "吴思",
+		cover: "/assets/books/chongfan.jpg",
+		rating: 8.5,
+		description: "揭示中国历史中的隐秘规则，深入剖析权力运作的本质。",
+		genre: ["历史", "社会"],
+	},
+	{
+		doubanId: "1082154",
+		status: "completed",
+		title: "活着",
+		author: "余华",
+		cover: "/assets/books/chongfan.jpg",
+		rating: 9.4,
+		description: "讲述一个人一生的苦难历程，展现生命的韧性与尊严。",
+		genre: ["小说", "文学"],
+	},
 
 	// 正在看的书籍
-	{ doubanId: "1008357", status: "reading", progress: 100, totalPages: 400 }, // 傲慢与偏见
+	{
+		doubanId: "1008357",
+		status: "reading",
+		progress: 100,
+		totalPages: 400,
+		title: "傲慢与偏见",
+		author: "简·奥斯汀",
+		cover: "/assets/books/chongfan.jpg",
+		rating: 9.0,
+		description: "英国文学经典，讲述伊丽莎白与达西的爱情故事。",
+		genre: ["小说", "爱情"],
+	},
 
 	// 想看的书籍
-	{ doubanId: "30353086", status: "planned" }, // 行为
-	{ doubanId: "1291836", status: "planned" }, // 自私的基因
-	{ doubanId: "6854525", status: "planned" }, // 黑天鹅
-	{ doubanId: "25782168", status: "planned" }, // 反脆弱
-	{ doubanId: "30165270", status: "planned" }, // 灰犀牛
-	{ doubanId: "30353963", status: "planned" }, // 事实
-	{ doubanId: "25984204", status: "planned" }, // 在细雨中呐喊
-	{ doubanId: "25749845", status: "planned" }, // 第七天
-	{ doubanId: "30360204", status: "planned" }, // 穿越寒冬
-	{ doubanId: "30360835", status: "planned" }, // 谁说商业直觉是天生的
-	{ doubanId: "1051220", status: "planned" }, // 血酬定律
-	{ doubanId: "1296395", status: "planned" }, // 洞穴奇案
-	{ doubanId: "3352904", status: "planned" }, // 每周工作四小时
-	{ doubanId: "1011507", status: "planned" }, // 资本论
-	{ doubanId: "26297694", status: "planned" }, // 世界观
-	{ doubanId: "25985021", status: "planned" }, // 人类简史
-	{ doubanId: "1200884", status: "planned" }, // 平凡的世界
-	{ doubanId: "1008145", status: "planned" }, // 围城
-	{ doubanId: "1479844", status: "planned" }, // 杀死一只知更鸟
-	{ doubanId: "10594787", status: "planned" }, // 霍乱时期的爱情
-	{ doubanId: "26969699", status: "planned" }, // 房思琪的初恋乐园
-	{ doubanId: "6964185", status: "planned" }, // 冰与火之歌
-	{ doubanId: "1858513", status: "planned" }, // 月亮与六便士
-	{ doubanId: "1009097", status: "planned" }, // 人生的智慧
-	{ doubanId: "1045818", status: "planned" }, // 苏菲的世界
-	{ doubanId: "6082808", status: "planned" }, // 百年孤独
-	{ doubanId: "3259440", status: "planned" }, // 白夜行
-	{ doubanId: "1008000", status: "planned" }, // 教父
+	{
+		doubanId: "30353086",
+		status: "planned",
+		title: "行为",
+		author: "罗伯特·萨波尔斯基",
+		cover: "/assets/books/chongfan.jpg",
+		description: "从生物学角度解读人类行为的百科全书。",
+		genre: ["科学", "心理学"],
+	},
+	{
+		doubanId: "1291836",
+		status: "planned",
+		title: "自私的基因",
+		author: "理查德·道金斯",
+		cover: "/assets/books/chongfan.jpg",
+		description: "进化论经典，从基因角度重新理解生命。",
+		genre: ["科学", "生物学"],
+	},
+	{
+		doubanId: "6854525",
+		status: "planned",
+		title: "黑天鹅",
+		author: "纳西姆·塔勒布",
+		cover: "/assets/books/chongfan.jpg",
+		description: "探讨不可预测事件对世界的巨大影响。",
+		genre: ["经济学", "哲学"],
+	},
+	{
+		doubanId: "25985021",
+		status: "planned",
+		title: "人类简史",
+		author: "尤瓦尔·赫拉利",
+		cover: "/assets/books/chongfan.jpg",
+		description: "从石器时代到人工智能时代的人类发展史。",
+		genre: ["历史", "人类学"],
+	},
 ];
 
 export default localBookList;
