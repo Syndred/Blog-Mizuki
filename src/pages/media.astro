@@ -417,6 +417,12 @@ const movieCounts = {
 			color: white;
 			border-color: var(--primary);
 		}
+
+		/* 确保隐藏样式生效 */
+		#books-container.hidden,
+		#movies-container.hidden {
+			display: none !important;
+		}
 	</style>
 
 	<script is:inline>
@@ -455,7 +461,9 @@ const movieCounts = {
 					movieSubtitle: "记录我的光影之旅",
 				};
 
-				// 确保初始状态正确
+				// 强制设置初始状态 - 显示书籍，隐藏电影
+				booksContainer.style.display = "grid";
+				moviesContainer.style.display = "none";
 				booksContainer.classList.remove("hidden");
 				moviesContainer.classList.add("hidden");
 				bookFilters?.classList.remove("hidden");
@@ -466,6 +474,8 @@ const movieCounts = {
 				btnBooks.addEventListener("click", function () {
 					btnBooks.classList.add("media-type-active");
 					btnMovies.classList.remove("media-type-active");
+					booksContainer.style.display = "grid";
+					moviesContainer.style.display = "none";
 					booksContainer.classList.remove("hidden");
 					moviesContainer.classList.add("hidden");
 					bookFilters?.classList.remove("hidden");
@@ -478,6 +488,8 @@ const movieCounts = {
 				btnMovies.addEventListener("click", function () {
 					btnMovies.classList.add("media-type-active");
 					btnBooks.classList.remove("media-type-active");
+					moviesContainer.style.display = "grid";
+					booksContainer.style.display = "none";
 					moviesContainer.classList.remove("hidden");
 					booksContainer.classList.add("hidden");
 					movieFilters?.classList.remove("hidden");
