@@ -65,6 +65,18 @@ const localBookList: BookItem[] = [
 		description: "英国文学经典，讲述伊丽莎白与达西的爱情故事。",
 		genre: ["小说", "爱情"],
 	},
+	{
+		doubanId: "1291836",
+		status: "reading",
+		progress: 150,
+		totalPages: 380,
+		title: "自私的基因",
+		author: "理查德·道金斯",
+		cover: "/assets/books/chongfan.jpg",
+		rating: 9.2,
+		description: "进化论经典，从基因角度重新理解生命。",
+		genre: ["科学", "生物学"],
+	},
 
 	// 想看的书籍
 	{
@@ -75,15 +87,6 @@ const localBookList: BookItem[] = [
 		cover: "/assets/books/chongfan.jpg",
 		description: "从生物学角度解读人类行为的百科全书。",
 		genre: ["科学", "心理学"],
-	},
-	{
-		doubanId: "1291836",
-		status: "planned",
-		title: "自私的基因",
-		author: "理查德·道金斯",
-		cover: "/assets/books/chongfan.jpg",
-		description: "进化论经典，从基因角度重新理解生命。",
-		genre: ["科学", "生物学"],
 	},
 	{
 		doubanId: "6854525",
