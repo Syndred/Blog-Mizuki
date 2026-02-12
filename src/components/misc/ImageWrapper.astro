@@ -14,16 +14,27 @@ interface Props {
 import { Image } from "astro:assets";
 import { url } from "../../utils/url-utils";
 
-const { id, src, alt, position = "center", basePath = "/", loading = "lazy" } = Astro.props;
+const {
+	id,
+	src,
+	alt,
+	position = "center",
+	basePath = "/",
+	loading = "lazy",
+} = Astro.props;
 const className = Astro.props.class;
 
+// 如果 src 为空，使用默认占位图
+const defaultPlaceholder = "/assets/placeholder.jpg";
+const imageSrc = src || defaultPlaceholder;
+
 const isLocal = !(
-	src.startsWith("/") ||
-	src.startsWith("http") ||
-	src.startsWith("https") ||
-	src.startsWith("data:")
+	imageSrc.startsWith("/") ||
+	imageSrc.startsWith("http") ||
+	imageSrc.startsWith("https") ||
+	imageSrc.startsWith("data:")
 );
-const isPublic = src.startsWith("/");
+const isPublic = imageSrc.startsWith("/");
 
 // TODO temporary workaround for images dynamic import
 // https://github.com/withastro/astro/issues/3373
@@ -34,7 +45,7 @@ if (isLocal) {
 		import: "default",
 	});
 	let normalizedPath = path
-		.normalize(path.join("../../", basePath, src))
+		.normalize(path.join("../../", basePath, imageSrc))
 		.replace(/\\/g, "/");
 	const file = files[normalizedPath];
 	if (!file) {
@@ -49,13 +60,43 @@ if (isLocal) {
 const imageClass = "w-full h-full object-cover";
 const imageStyle = `object-position: ${position}`;
 
-// 检查是否是 Bilibili 图片
-const isBilibiliImage = !isLocal && src.includes("hdslb.com");
-// 对于外部图片（特别是Bilibili），需要设置referrerpolicy避免403错误
-const referrerPolicy = !isLocal && isBilibiliImage ? "no-referrer" : undefined;
+// 检查是否是 Bilibili 或豆瓣图片
+const isBilibiliImage = !isLocal && imageSrc.includes("hdslb.com");
+const isDoubanImage = !isLocal && imageSrc.includes("doubanio.com");
+// 对于外部图片（特别是Bilibili和豆瓣），需要设置referrerpolicy避免403错误
+const referrerPolicy =
+	!isLocal && (isBilibiliImage || isDoubanImage) ? "no-referrer" : undefined;
 ---
-<div id={id} class:list={[className, 'overflow-hidden relative']}>
-    <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
-    {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle} loading={loading}/>}
-    {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle} loading={loading} referrerpolicy={referrerPolicy} crossorigin={isBilibiliImage ? "anonymous" : undefined}/>}
+
+<div id={id} class:list={[className, "overflow-hidden relative"]}>
+	<div
+		class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"
+	>
+	</div>
+	{
+		isLocal && img && (
+			<Image
+				src={img}
+				alt={alt || ""}
+				class={imageClass}
+				style={imageStyle}
+				loading={loading}
+			/>
+		)
+	}
+	{
+		!isLocal && (
+			<img
+				src={isPublic ? url(imageSrc) : imageSrc}
+				alt={alt || ""}
+				class={imageClass}
+				style={imageStyle}
+				loading={loading}
+				referrerpolicy={referrerPolicy}
+				crossorigin={
+					isBilibiliImage || isDoubanImage ? "anonymous" : undefined
+				}
+			/>
+		)
+	}
 </div>

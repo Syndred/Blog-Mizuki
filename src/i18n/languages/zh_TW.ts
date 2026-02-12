@@ -80,6 +80,31 @@ export const zh_TW: Translation = {
 	[Key.animeEmptyBangumi]: "請檢查 Bangumi 設定或網路連線",
 	[Key.animeEmptyLocal]: "請在 src/data/anime.ts 檔案中新增番劇資訊",
 
+	// 書籍頁面
+	[Key.books]: "書籍",
+	[Key.bookTitle]: "我的閱讀記錄",
+	[Key.bookSubtitle]: "記錄我的閱讀之旅",
+	[Key.bookStatusReading]: "在讀",
+	[Key.bookStatusCompleted]: "讀過",
+	[Key.bookStatusPlanned]: "想讀",
+	[Key.bookFilterAll]: "全部",
+	[Key.bookAuthor]: "作者",
+	[Key.bookPublisher]: "出版社",
+	[Key.bookEmpty]: "暫無書籍資料",
+	[Key.bookEmptyLocal]: "請在 src/data/books.ts 檔案中新增書籍資訊",
+
+	// 電影頁面
+	[Key.movies]: "電影",
+	[Key.movieTitle]: "我的觀影記錄",
+	[Key.movieSubtitle]: "記錄我的光影之旅",
+	[Key.movieStatusWatched]: "看過",
+	[Key.movieStatusPlanned]: "想看",
+	[Key.movieFilterAll]: "全部",
+	[Key.movieDirector]: "導演",
+	[Key.movieDuration]: "時長",
+	[Key.movieEmpty]: "暫無電影資料",
+	[Key.movieEmptyLocal]: "請在 src/data/movies.ts 檔案中新增電影資訊",
+
 	// 短文頁面
 	[Key.diarySubtitle]: "隨時隨地，分享生活",
 	[Key.diaryCount]: "條短文",

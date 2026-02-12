@@ -77,6 +77,34 @@ export const en: Translation = {
 	[Key.animeEmptyLocal]:
 		"Please add anime information in src/data/anime.ts file",
 
+	// Books Page
+	[Key.books]: "Books",
+	[Key.bookTitle]: "My Reading List",
+	[Key.bookSubtitle]: "Record my reading journey",
+	[Key.bookStatusReading]: "Reading",
+	[Key.bookStatusCompleted]: "Completed",
+	[Key.bookStatusPlanned]: "Planned",
+	[Key.bookFilterAll]: "All",
+	[Key.bookAuthor]: "Author",
+	[Key.bookPublisher]: "Publisher",
+	[Key.bookEmpty]: "No books data available",
+	[Key.bookEmptyLocal]:
+		"Please add book information in src/data/books.ts file",
+
+	// Movies Page
+	[Key.movies]: "Movies",
+	[Key.movieTitle]: "My Movie List",
+	[Key.movieSubtitle]: "Record my cinema journey",
+	[Key.movieStatusWatched]: "Watched",
+	[Key.movieStatusWatching]: "Watching",
+	[Key.movieStatusPlanned]: "Planned",
+	[Key.movieFilterAll]: "All",
+	[Key.movieDirector]: "Director",
+	[Key.movieDuration]: "Duration",
+	[Key.movieEmpty]: "No movies data available",
+	[Key.movieEmptyLocal]:
+		"Please add movie information in src/data/movies.ts file",
+
 	// Diary Page
 	[Key.diarySubtitle]: "Share life, anytime, anywhere",
 	[Key.diaryCount]: "diary entries",

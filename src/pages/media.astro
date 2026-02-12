@@ -1,0 +1,409 @@
+﻿---
+import ImageWrapper from "../components/misc/ImageWrapper.astro";
+import { siteConfig } from "../config";
+import localBookList from "../data/books";
+import localMovieList from "../data/movies";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import "../styles/anime.css";
+
+if (!siteConfig.featurePages.books && !siteConfig.featurePages.movies) {
+	return Astro.redirect("/404/");
+}
+
+function getBookStatusInfo(status: string) {
+	switch (status) {
+		case "reading":
+			return {
+				text: i18n(I18nKey.bookStatusReading),
+				class: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
+				icon: "📖",
+			};
+		case "completed":
+			return {
+				text: i18n(I18nKey.bookStatusCompleted),
+				class: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+				icon: "✓",
+			};
+		case "planned":
+			return {
+				text: i18n(I18nKey.bookStatusPlanned),
+				class: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+				icon: "❤",
+			};
+		default:
+			return {
+				text: status,
+				class: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
+				icon: "?",
+			};
+	}
+}
+
+function getMovieStatusInfo(status: string) {
+	switch (status) {
+		case "watched":
+			return {
+				text: i18n(I18nKey.movieStatusWatched),
+				class: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+				icon: "✓",
+			};
+		case "watching":
+			return {
+				text: i18n(I18nKey.movieStatusWatching),
+				class: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
+				icon: "▶",
+			};
+		case "planned":
+			return {
+				text: i18n(I18nKey.movieStatusPlanned),
+				class: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+				icon: "❤",
+			};
+		default:
+			return {
+				text: status,
+				class: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
+				icon: "?",
+			};
+	}
+}
+---
+
+<MainGridLayout title="我的书影音" description="记录我的阅读与观影之旅">
+	<div
+		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+	>
+		<div class="card-base anime-card-base z-10 px-9 py-6 relative w-full">
+			<div class="relative w-full mb-8">
+				<div class="mb-6 flex justify-between items-start">
+					<div>
+						<h1
+							class="text-4xl font-bold text-black/90 dark:text-white/90 mb-2 relative before:w-1 before:h-8 before:rounded-md before:bg-[var(--primary)] before:absolute before:top-1/2 before:-translate-y-1/2 before:-left-4"
+							id="page-title"
+						>
+							{i18n(I18nKey.bookTitle)}
+						</h1>
+						<p
+							class="text-black/75 dark:text-white/75"
+							id="page-subtitle"
+						>
+							{i18n(I18nKey.bookSubtitle)}
+						</p>
+					</div>
+					<div class="flex gap-2">
+						<button
+							id="btn-books"
+							class="media-type-btn media-type-active px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2"
+							data-type="books"
+						>
+							<span class="text-lg">📚</span>
+							<span>书籍</span>
+						</button>
+						<button
+							id="btn-movies"
+							class="media-type-btn px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2"
+							data-type="movies"
+						>
+							<span class="text-lg">🎬</span>
+							<span>电影</span>
+						</button>
+					</div>
+				</div>
+
+				<div class="mb-6" id="book-filters">
+					<div class="anime-filter-container flex flex-wrap gap-2">
+						<button
+							class="anime-filter-tag anime-active"
+							data-status="all"
+							>{i18n(I18nKey.bookFilterAll)}</button
+						>
+						<button class="anime-filter-tag" data-status="reading"
+							>{i18n(I18nKey.bookStatusReading)}</button
+						>
+						<button class="anime-filter-tag" data-status="planned"
+							>{i18n(I18nKey.bookStatusPlanned)}</button
+						>
+						<button class="anime-filter-tag" data-status="completed"
+							>{i18n(I18nKey.bookStatusCompleted)}</button
+						>
+					</div>
+				</div>
+
+				<div class="mb-6 hidden" id="movie-filters">
+					<div class="anime-filter-container flex flex-wrap gap-2">
+						<button
+							class="anime-filter-tag anime-active"
+							data-status="all"
+							>{i18n(I18nKey.movieFilterAll)}</button
+						>
+						<button class="anime-filter-tag" data-status="watched"
+							>{i18n(I18nKey.movieStatusWatched)}</button
+						>
+						<button class="anime-filter-tag" data-status="watching"
+							>{i18n(I18nKey.movieStatusWatching)}</button
+						>
+						<button class="anime-filter-tag" data-status="planned"
+							>{i18n(I18nKey.movieStatusPlanned)}</button
+						>
+					</div>
+				</div>
+			</div>
+
+			<div class="mb-8">
+				<div
+					id="books-container"
+					class="anime-grid-container anime-list-mode grid gap-4 md:gap-6"
+				>
+					{
+						localBookList.map((book) => {
+							const statusInfo = getBookStatusInfo(book.status);
+							const progressPercent =
+								book.totalPages > 0
+									? (book.progress / book.totalPages) * 100
+									: 0;
+							return (
+								<div
+									class="group relative bg-[var(--card-bg)] border border-[var(--line-divider)] rounded-[var(--radius-large)] overflow-hidden hover:shadow-lg transition-shadow"
+									data-anime-status={book.status}
+								>
+									<div class="relative anime-cover-container aspect-[2/3] overflow-hidden">
+										<a
+											href={`https://book.douban.com/subject/${book.doubanId}/`}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="block w-full h-full"
+										>
+											<ImageWrapper
+												src="/assets/books/chongfan.jpg"
+												alt="Book Cover"
+												class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+											/>
+										</a>
+										<div
+											class={`absolute top-2 left-2 px-2 py-1 rounded-md text-xs font-medium ${statusInfo.class}`}
+										>
+											<span class="mr-1">
+												{statusInfo.icon}
+											</span>
+											<span>{statusInfo.text}</span>
+										</div>
+										{book.status === "reading" &&
+											book.totalPages > 0 && (
+												<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+													<div class="w-full bg-white/20 rounded-full h-1.5 mb-1">
+														<div
+															class="bg-gradient-to-r from-emerald-400 to-teal-400 h-1.5 rounded-full transition-all duration-300"
+															style={`width: ${progressPercent}%`}
+														/>
+													</div>
+													<div class="text-white text-xs font-medium">
+														{book.progress}/
+														{book.totalPages} 页 (
+														{Math.round(
+															progressPercent,
+														)}
+														%)
+													</div>
+												</div>
+											)}
+									</div>
+									<div class="p-3">
+										<h3 class="text-sm font-bold text-black/90 dark:text-white/90 mb-1 leading-tight line-clamp-2">
+											豆瓣ID: {book.doubanId}
+										</h3>
+										<p class="text-black/60 dark:text-white/60 text-xs mb-2">
+											状态: {book.status}
+										</p>
+									</div>
+								</div>
+							);
+						})
+					}
+				</div>
+
+				<div
+					id="movies-container"
+					class="anime-grid-container anime-list-mode grid gap-4 md:gap-6 hidden"
+				>
+					{
+						localMovieList.map((movie) => {
+							const statusInfo = getMovieStatusInfo(movie.status);
+							return (
+								<div
+									class="group relative bg-[var(--card-bg)] border border-[var(--line-divider)] rounded-[var(--radius-large)] overflow-hidden hover:shadow-lg transition-shadow"
+									data-anime-status={movie.status}
+								>
+									<div class="relative anime-cover-container aspect-[2/3] overflow-hidden">
+										<a
+											href={`https://movie.douban.com/subject/${movie.doubanId}/`}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="block w-full h-full"
+										>
+											<ImageWrapper
+												src="/assets/movies/Interstellar.webp"
+												alt="Movie Poster"
+												class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+											/>
+										</a>
+										<div
+											class={`absolute top-2 left-2 px-2 py-1 rounded-md text-xs font-medium ${statusInfo.class}`}
+										>
+											<span class="mr-1">
+												{statusInfo.icon}
+											</span>
+											<span>{statusInfo.text}</span>
+										</div>
+									</div>
+									<div class="p-3">
+										<h3 class="text-sm font-bold text-black/90 dark:text-white/90 mb-1 leading-tight line-clamp-2">
+											豆瓣ID: {movie.doubanId}
+										</h3>
+										<p class="text-black/60 dark:text-white/60 text-xs mb-2">
+											状态: {movie.status}
+										</p>
+									</div>
+								</div>
+							);
+						})
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		.media-type-btn {
+			background: var(--btn-regular-bg);
+			color: var(--btn-content);
+			border: 1px solid var(--line-divider);
+		}
+		.media-type-btn:hover:not(.media-type-active) {
+			background: var(--btn-hover-bg);
+			border-color: var(--primary);
+			transform: translateY(-1px);
+		}
+		.media-type-btn.media-type-active {
+			background: var(--primary);
+			color: white;
+			border-color: var(--primary);
+		}
+	</style>
+
+	<script is:inline>
+		(function () {
+			const i18nTexts = {
+				bookTitle:
+					document.getElementById("page-title")?.textContent ||
+					"我的阅读记录",
+				bookSubtitle: "记录我的阅读之旅",
+				movieTitle: "我的观影记录",
+				movieSubtitle: "记录我的光影之旅",
+			};
+
+			function initMediaPage() {
+				const btnBooks = document.getElementById("btn-books");
+				const btnMovies = document.getElementById("btn-movies");
+				const booksContainer =
+					document.getElementById("books-container");
+				const moviesContainer =
+					document.getElementById("movies-container");
+				const bookFilters = document.getElementById("book-filters");
+				const movieFilters = document.getElementById("movie-filters");
+				const pageTitle = document.getElementById("page-title");
+				const pageSubtitle = document.getElementById("page-subtitle");
+
+				if (
+					!btnBooks ||
+					!btnMovies ||
+					!booksContainer ||
+					!moviesContainer
+				)
+					return;
+
+				btnBooks.addEventListener("click", () => {
+					btnBooks.classList.add("media-type-active");
+					btnMovies.classList.remove("media-type-active");
+					booksContainer.classList.remove("hidden");
+					moviesContainer.classList.add("hidden");
+					bookFilters?.classList.remove("hidden");
+					movieFilters?.classList.add("hidden");
+					if (pageTitle) pageTitle.textContent = i18nTexts.bookTitle;
+					if (pageSubtitle)
+						pageSubtitle.textContent = i18nTexts.bookSubtitle;
+				});
+
+				btnMovies.addEventListener("click", () => {
+					btnMovies.classList.add("media-type-active");
+					btnBooks.classList.remove("media-type-active");
+					moviesContainer.classList.remove("hidden");
+					booksContainer.classList.add("hidden");
+					movieFilters?.classList.remove("hidden");
+					bookFilters?.classList.add("hidden");
+					if (pageTitle) pageTitle.textContent = i18nTexts.movieTitle;
+					if (pageSubtitle)
+						pageSubtitle.textContent = i18nTexts.movieSubtitle;
+				});
+
+				initFilterButtons();
+			}
+
+			function initFilterButtons() {
+				const filterContainers = document.querySelectorAll(
+					".anime-filter-container",
+				);
+				filterContainers.forEach((container) => {
+					const filterTags =
+						container.querySelectorAll(".anime-filter-tag");
+					const parentId = container.parentElement?.id;
+					let listContainer;
+					if (parentId === "book-filters") {
+						listContainer =
+							document.getElementById("books-container");
+					} else if (parentId === "movie-filters") {
+						listContainer =
+							document.getElementById("movies-container");
+					}
+					if (!listContainer) return;
+
+					filterTags.forEach((tag) => {
+						tag.addEventListener("click", function () {
+							if (this.classList.contains("anime-active")) return;
+							filterTags.forEach((t) =>
+								t.classList.remove("anime-active"),
+							);
+							this.classList.add("anime-active");
+							const status = this.getAttribute("data-status");
+							const items = listContainer.querySelectorAll(
+								"[data-anime-status]",
+							);
+							items.forEach((item) => {
+								const itemStatus =
+									item.getAttribute("data-anime-status");
+								if (status === "all" || itemStatus === status) {
+									item.classList.remove("anime-hidden");
+								} else {
+									item.classList.add("anime-hidden");
+								}
+							});
+						});
+					});
+				});
+			}
+
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", initMediaPage);
+			} else {
+				initMediaPage();
+			}
+
+			if (typeof window !== "undefined" && window.swup) {
+				window.swup.hooks.on("content:replace", () =>
+					setTimeout(initMediaPage, 150),
+				);
+			}
+		})();
+	</script>
+</MainGridLayout>

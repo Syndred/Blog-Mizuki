@@ -77,6 +77,33 @@ export const ja: Translation = {
 	[Key.animeEmptyLocal]:
 		"src/data/anime.tsのファイルにアニメの情報を追加してください",
 
+	// 書籍ページ
+	[Key.books]: "書籍",
+	[Key.bookTitle]: "読書記録",
+	[Key.bookSubtitle]: "読書の旅の記録です",
+	[Key.bookStatusReading]: "読書中",
+	[Key.bookStatusCompleted]: "完了",
+	[Key.bookStatusPlanned]: "検討中",
+	[Key.bookFilterAll]: "すべて",
+	[Key.bookAuthor]: "著者",
+	[Key.bookPublisher]: "出版社",
+	[Key.bookEmpty]: "書籍のデータはありません",
+	[Key.bookEmptyLocal]:
+		"src/data/books.tsのファイルに書籍の情報を追加してください",
+
+	// 映画ページ
+	[Key.movies]: "映画",
+	[Key.movieTitle]: "視聴した映画",
+	[Key.movieSubtitle]: "映画の旅の記録です",
+	[Key.movieStatusWatched]: "視聴済み",
+	[Key.movieStatusPlanned]: "検討中",
+	[Key.movieFilterAll]: "すべて",
+	[Key.movieDirector]: "監督",
+	[Key.movieDuration]: "上映時間",
+	[Key.movieEmpty]: "映画のデータはありません",
+	[Key.movieEmptyLocal]:
+		"src/data/movies.tsのファイルに映画の情報を追加してください",
+
 	// 日記ページ
 	[Key.diarySubtitle]: "いつでも、どこでも生活を共有",
 	[Key.diaryCount]: "件の日記のエントリー",

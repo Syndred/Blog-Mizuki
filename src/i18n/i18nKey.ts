@@ -73,6 +73,32 @@ enum I18nKey {
 	animeEmptyBangumi = "animeEmptyBangumi",
 	animeEmptyLocal = "animeEmptyLocal",
 
+	// 书籍页面
+	books = "books",
+	bookTitle = "bookTitle",
+	bookSubtitle = "bookSubtitle",
+	bookStatusReading = "bookStatusReading",
+	bookStatusCompleted = "bookStatusCompleted",
+	bookStatusPlanned = "bookStatusPlanned",
+	bookFilterAll = "bookFilterAll",
+	bookAuthor = "bookAuthor",
+	bookPublisher = "bookPublisher",
+	bookEmpty = "bookEmpty",
+	bookEmptyLocal = "bookEmptyLocal",
+
+	// 电影页面
+	movies = "movies",
+	movieTitle = "movieTitle",
+	movieSubtitle = "movieSubtitle",
+	movieStatusWatched = "movieStatusWatched",
+	movieStatusWatching = "movieStatusWatching",
+	movieStatusPlanned = "movieStatusPlanned",
+	movieFilterAll = "movieFilterAll",
+	movieDirector = "movieDirector",
+	movieDuration = "movieDuration",
+	movieEmpty = "movieEmpty",
+	movieEmptyLocal = "movieEmptyLocal",
+
 	// 短文页面
 	diarySubtitle = "diarySubtitle",
 	diaryCount = "diaryCount",

@@ -39,6 +39,8 @@ export const siteConfig: SiteConfig = {
 	// 特色页面开关配置（关闭未使用的页面有助于提升 SEO，关闭后请记得在 navbarConfig 中移除对应链接）
 	featurePages: {
 		anime: false, // 番剧页面开关
+		books: true, // 书籍页面开关
+		movies: true, // 电影页面开关
 		diary: true, // 日记页面开关
 		friends: true, // 友链页面开关
 		projects: true, // 项目页面开关
@@ -291,9 +293,14 @@ export const navBarConfig: NavBarConfig = {
 				// 	icon: "material-symbols:movie",
 				// },
 				{
+					name: "Media",
+					url: "/media/",
+					icon: "material-symbols:library-books",
+				},
+				{
 					name: "Diary",
 					url: "/diary/",
-					icon: "material-symbols:book",
+					icon: "material-symbols:edit-note",
 				},
 				{
 					name: "Gallery",
@@ -609,7 +616,7 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: false	, // 启用看板娘
+	enable: false, // 启用看板娘
 	models: ["/pio/models/pio/model.json"], // 默认模型路径
 	position: "left", // 模型位置
 	width: 280, // 默认宽度
