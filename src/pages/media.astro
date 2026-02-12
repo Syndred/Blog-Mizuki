@@ -421,16 +421,12 @@ const movieCounts = {
 
 	<script is:inline>
 		(function () {
-			const i18nTexts = {
-				bookTitle:
-					document.getElementById("page-title")?.textContent ||
-					"我的阅读记录",
-				bookSubtitle: "记录我的阅读之旅",
-				movieTitle: "我的观影记录",
-				movieSubtitle: "记录我的光影之旅",
-			};
+			let initialized = false;
 
 			function initMediaPage() {
+				// 防止重复初始化
+				if (initialized) return;
+
 				const btnBooks = document.getElementById("btn-books");
 				const btnMovies = document.getElementById("btn-movies");
 				const booksContainer =
@@ -447,46 +443,52 @@ const movieCounts = {
 					!btnMovies ||
 					!booksContainer ||
 					!moviesContainer
-				)
+				) {
 					return;
+				}
 
-				const booksSentinel = document.getElementById(
-					"books-scroll-sentinel",
-				);
-				const moviesSentinel = document.getElementById(
-					"movies-scroll-sentinel",
-				);
+				// 获取初始文本
+				const i18nTexts = {
+					bookTitle: pageTitle?.textContent || "我的阅读记录",
+					bookSubtitle: "记录我的阅读之旅",
+					movieTitle: "我的观影记录",
+					movieSubtitle: "记录我的光影之旅",
+				};
 
-				btnBooks.addEventListener("click", () => {
+				// 确保初始状态正确
+				booksContainer.classList.remove("hidden");
+				moviesContainer.classList.add("hidden");
+				bookFilters?.classList.remove("hidden");
+				movieFilters?.classList.add("hidden");
+				btnBooks.classList.add("media-type-active");
+				btnMovies.classList.remove("media-type-active");
+
+				btnBooks.addEventListener("click", function () {
 					btnBooks.classList.add("media-type-active");
 					btnMovies.classList.remove("media-type-active");
 					booksContainer.classList.remove("hidden");
 					moviesContainer.classList.add("hidden");
 					bookFilters?.classList.remove("hidden");
 					movieFilters?.classList.add("hidden");
-					if (booksSentinel) booksSentinel.classList.remove("hidden");
-					if (moviesSentinel) moviesSentinel.classList.add("hidden");
 					if (pageTitle) pageTitle.textContent = i18nTexts.bookTitle;
 					if (pageSubtitle)
 						pageSubtitle.textContent = i18nTexts.bookSubtitle;
 				});
 
-				btnMovies.addEventListener("click", () => {
+				btnMovies.addEventListener("click", function () {
 					btnMovies.classList.add("media-type-active");
 					btnBooks.classList.remove("media-type-active");
 					moviesContainer.classList.remove("hidden");
 					booksContainer.classList.add("hidden");
 					movieFilters?.classList.remove("hidden");
 					bookFilters?.classList.add("hidden");
-					if (moviesSentinel)
-						moviesSentinel.classList.remove("hidden");
-					if (booksSentinel) booksSentinel.classList.add("hidden");
 					if (pageTitle) pageTitle.textContent = i18nTexts.movieTitle;
 					if (pageSubtitle)
 						pageSubtitle.textContent = i18nTexts.movieSubtitle;
 				});
 
 				initFilterButtons();
+				initialized = true;
 			}
 
 			function initFilterButtons() {
